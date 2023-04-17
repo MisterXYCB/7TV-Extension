@@ -20,6 +20,7 @@ export class ChatMessage<C extends ComponentFactory = ComponentFactory> {
 	public deliveryState: MessageDeliveryState = "IDLE";
 	public timestamp = 0;
 	public historical = false;
+	public filtered = false;
 	public moderation: ChatMessageModeration = {
 		deleted: false,
 		banned: false,

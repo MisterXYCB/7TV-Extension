@@ -102,7 +102,9 @@ defineExpose({
 <script lang="ts">
 import { HighlightDef } from "@/composable/chat/useChatHighlights";
 import { declareConfig, useConfig } from "@/composable/useSettings";
+import SettingsConfigChatFilter from "@/site/global/settings/SettingsConfigChatFilter.vue";
 import SettingsConfigHighlights from "@/site/global/settings/SettingsConfigHighlights.vue";
+import { FilterDef } from "@/composable/chat/useChatFilter";
 
 export const config = [
 	declareConfig("general.blur_unlisted_emotes", "TOGGLE", {
@@ -408,6 +410,46 @@ export const config = [
 		label: "Nametag Paints",
 		hint: "Whether or not to display nametag paints",
 		defaultValue: true,
+	}),
+	declareConfig<boolean>("chat.filtered_chat", "TOGGLE", {
+		path: ["Chat", "Filter"],
+		label: "Filtered Chat",
+		hint: "Enable a filtered chat, where only allowed/not blacklisted messages are shown",
+		defaultValue: false,
+	}),
+	declareConfig<boolean>("chat.filter_is_blocklist", "TOGGLE", {
+		path: ["Chat", "Filter"],
+		label: "Allowlist/Blocklist",
+		hint: "Change if added keys function as allowlist or blocklist",
+		defaultValue: true,
+	}),
+	declareConfig<boolean>("chat.filter_streamer_bypass", "TOGGLE", {
+		path: ["Chat", "Filter"],
+		label: "Bypass for Streamer",
+		hint: "Allow messages from the streamer to ignore the filter",
+		defaultValue: false,
+	}),
+	declareConfig<boolean>("chat.filter_mod_bypass", "TOGGLE", {
+		path: ["Chat", "Filter"],
+		label: "Bypass for Moderators",
+		hint: "Allow messages from moderators to ignore the filter",
+		defaultValue: false,
+	}),
+	declareConfig<boolean>("chat.filter_vip_bypass", "TOGGLE", {
+		path: ["Chat", "Filter"],
+		label: "Bypass for VIPs",
+		hint: "Allow messages from VIPs to ignore the filter",
+		defaultValue: false,
+	}),
+	declareConfig<Map<string, FilterDef>>("chat.custom_filter", "CUSTOM", {
+		path: ["Chat", ""],
+		custom: {
+			component: markRaw(SettingsConfigChatFilter),
+			gridMode: "new-row",
+		},
+		label: "Filters",
+		hint: "Set custom filters for chat",
+		defaultValue: new Map(),
 	}),
 ];
 </script>
