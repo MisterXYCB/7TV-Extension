@@ -411,16 +411,16 @@ export const config = [
 		hint: "Whether or not to display nametag paints",
 		defaultValue: true,
 	}),
-	declareConfig<boolean>("chat.filtered_chat", "TOGGLE", {
+	declareConfig<boolean>("chat.a_filtered_chat", "TOGGLE", {
 		path: ["Chat", "Filter"],
 		label: "Filtered Chat",
 		hint: "Enable a filtered chat, where only allowed/not blacklisted messages are shown",
 		defaultValue: false,
 	}),
-	declareConfig<boolean>("chat.filter_is_blocklist", "TOGGLE", {
+	declareConfig<boolean>("chat.b_filter_is_blocklist", "TOGGLE", {
 		path: ["Chat", "Filter"],
 		label: "Allowlist/Blocklist",
-		hint: "Change if added keys function as allowlist or blocklist",
+		hint: "Allowlist: Only show messages or user that match the filter. Blocklist: Only show messages or user that do not match the filter",
 		defaultValue: true,
 	}),
 	declareConfig<boolean>("chat.filter_streamer_bypass", "TOGGLE", {
@@ -442,7 +442,7 @@ export const config = [
 		defaultValue: false,
 	}),
 	declareConfig<Map<string, FilterDef>>("chat.custom_filter", "CUSTOM", {
-		path: ["Chat", ""],
+		path: ["Chat", "Filter"],
 		custom: {
 			component: markRaw(SettingsConfigChatFilter),
 			gridMode: "new-row",

@@ -105,7 +105,6 @@ export function useChatMessages(ctx: ChannelContext) {
 	 * @param message the message to queue up
 	 */
 	function add<T extends ChatMessage>(message: T, now?: boolean): void {
-		if (message.filtered) return;
 		if (scroller.paused) {
 			// if scrolling is paused, buffer the message
 			scroller.pauseBuffer.push(message);

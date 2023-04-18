@@ -298,7 +298,7 @@ function onChatMessage(msg: ChatMessage, msgData: Twitch.AnyMessage, shouldRende
 
 	// Add message to store
 	// it will be rendered on the next tick
-	if (shouldRender) messages.add(msg);
+	if (shouldRender && !msg.filtered) messages.add(msg);
 }
 
 function onModerationMessage(msgData: Twitch.ModerationMessage) {

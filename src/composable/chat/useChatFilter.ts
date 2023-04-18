@@ -61,6 +61,7 @@ export function useChatFilter(ctx: ChannelContext) {
 				f.id,
 				toRaw({
 					...f,
+					persist: false,
 				}),
 			]);
 

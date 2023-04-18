@@ -83,18 +83,14 @@ const inputs = reactive({
 const interactRef = ref<HTMLElement[]>();
 
 function onInputFocus(f: FilterDef, inputName: keyof typeof inputs): void {
-    console.log("f")
 	const input = inputs[inputName].get(f);
-    console.log("input3", inputs.pattern)
 	if (!input) return;
 
 	input.focus();
-    console.log("input", input)
 }
 
 function onInputBlur(f: FilterDef, inputName: keyof typeof inputs): void {
 	const input = inputs[inputName].get(f);
-    console.log("input2", inputs.pattern)
 	if (!input) return;
 
 	const id = uuid();
@@ -127,11 +123,9 @@ function onFilterDelete(f: FilterDef): void {
 	filters.save();
 }
 
-watch(newInput, async (val, old) => {
-    console.log("moin")
+watch(newInput, (val, old) => {
 	if (!val || old) return;
-    
-	const f = await filters.define(
+	const f = filters.define(
 		"new-filter",
 		{
 			pattern: val,
@@ -140,13 +134,9 @@ watch(newInput, async (val, old) => {
 		},
 		true,
 	);
-    const input = await inputs.pattern.get(f);
-    input.focus();
-    console.log("f2", f)
 
 	nextTick(() => {
 		const input = inputs.pattern.get(f);
-        console.log("input4", input)
 		if (!input) return;
 
 		input.focus();
@@ -225,15 +215,6 @@ main.seventv-settings-chat-filters {
 						width: 100%;
 						height: initial;
 					}
-				}
-			}
-
-			[name="color"] > input {
-				&::-webkit-color-swatch-wrapper {
-					padding: 0;
-				}
-				&::-webkit-color-swatch {
-					border: none;
 				}
 			}
 
